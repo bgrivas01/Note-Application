@@ -1,0 +1,79 @@
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    position: relative;
+    background: #111;
+    color: white;
+}
+
+/* Top center title */
+h1 {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+}
+
+body{
+    background: linear-gradient(to right, black, white)
+}
+
+/* Center search bar */
+input[type="text"] {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 450px;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+}
+
+/* General button styling */
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Search button next to input */
+input[type="text"] + button {
+    position: absolute;
+    top: 50%;
+    left: calc(50% + 240px);
+    transform: translateY(-50%);
+}
+
+/* Top right buttons */
+#myAccount-btn,
+#logout-btn {
+    position: absolute;
+    top: 20px;
+}
+
+#myAccount-btn {
+    right: 140px;
+}
+
+#logout-btn {
+    right: 20px;
+}
+
+/* Bottom left */
+#myNotes-btn {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+}
+
+/* Bottom right */
+#createNew-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
