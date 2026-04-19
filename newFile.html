@@ -3,21 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Document Editor</title>
+    <link rel="stylesheet" href="newFile.css">
 </head>
 <body>
-    <header>
-        
-    </header>
-    <main>
-        <section>
-            <h2>Your Notes</h2>
-        </section>
+
+    <main class="document">
+        <input type="text" placeholder="Title" class="title-input">
+
+        <textarea placeholder="Write your note here..." class="content-input"></textarea>
+
+        <div class="buttons">
+            <button id="save-btn">Post</button>
+            <a href="homepage.html">
+                <button id="home-btn">Home</button>
+            </a>
+        </div>
     </main>
-    <footer>
-        <p>&copy; 2023 Note Application</p>
-    </footer>
+
     <script src="script.js"></script>
 </body>
 </html>

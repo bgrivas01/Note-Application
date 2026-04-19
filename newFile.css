@@ -1,0 +1,57 @@
+body {
+    background-color: #f3f3f3;
+    font-family: "Times New Roman", serif;
+    margin: 0;
+
+    /* THIS centers everything vertically + horizontally */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Bigger "paper" */
+.document {
+    background-color: white;
+    width: 900px;
+    max-width: 95%;
+    height: 85vh; /* makes it tall like a real doc */
+    padding: 40px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Title */
+.title-input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* 🔥 THIS is the important part */
+.content-input {
+    flex: 1; /* takes up remaining space */
+    width: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* Buttons stay at bottom */
+.buttons {
+    margin-top: auto; /* pushes buttons to bottom */
+
+    display: flex;
+    justify-content: space-between; /* 🔥 splits left & right */
+    align-items: center;
+}
