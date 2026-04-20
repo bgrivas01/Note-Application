@@ -1,5 +1,3 @@
-
-
 document.getElementById("createAccount-form").addEventListener("submit", function(event) {
     event.preventDefault();
      const data = {
@@ -22,7 +20,11 @@ document.getElementById("createAccount-form").addEventListener("submit", functio
         console.log(result);
 
         // Redirect AFTER backend confirms success
-        window.location.href = "homepage.html";
+        if (result.status === "success") {
+            window.location.href = "homepage.html";
+        } else {
+            alert("Registration failed: " + (result.message || "Please try again"));
+        }
     })
     .catch(error => console.error(error));
 });
@@ -30,10 +32,11 @@ document.getElementById("createAccount-form").addEventListener("submit", functio
 
 document.getElementById("Login-form").addEventListener("submit", function(event) {
     event.preventDefault();
+    const form = document.getElementById("Login-form");
      const loginData = {
-     username: document.getElementById("Username").value,
-     email: document.getElementById("Email").value,
-     password: document.getElementById("Password").value
+     username: form.querySelector("[name='login-username']").value,
+     email: form.querySelector("[name='login-email']").value,
+     password: form.querySelector("[name='login-password']").value
      };
     
     // send to backend here
@@ -49,7 +52,11 @@ document.getElementById("Login-form").addEventListener("submit", function(event)
         console.log(result);
 
         // Redirect AFTER backend confirms success
-        window.location.href = "homepage.html";
+        if (result.status === "success") {
+            window.location.href = "homepage.html";
+        } else {
+            alert("Login failed: " + (result.message || "Invalid credentials"));
+        }
     })
     .catch(error => console.error(error));
 });
