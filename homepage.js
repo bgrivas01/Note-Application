@@ -1,26 +1,59 @@
-const saveBtn = document.getElementById('save-btn');
-const titleInput = document.querySelector('.title-input');
-const contentInput = document.querySelector('.content-input');
+const searchInput = document.querySelector('input');
+const searchBtn = document.querySelector('button');
+const resultsContainer = document.createElement('div');
+resultsContainer.className = 'results';
+document.body.appendChild(resultsContainer);
 
-// Load note if opened from search
-const params = new URLSearchParams(window.location.search);
-const loadTitle = params.get('title');
-if (loadTitle) {
-    const saved = JSON.parse(localStorage.getItem(`doc_${loadTitle}`));
-    if (saved) {
-        titleInput.value = saved.title;
-        contentInput.value = saved.content;
-    }
+function getDocs() {
+    return Object.keys(localStorage)
+        .filter(k => k.startsWith('doc_'))
+        .map(k => JSON.parse(localStorage.getItem(k)));
 }
 
-saveBtn.addEventListener('click', () => {
-    const title = titleInput.value.trim();
-    const content = contentInput.value.trim();
+function renderResults(docs) {
+    resultsContainer.innerHTML = '';
 
-    if (!title) { alert('Please enter a title before saving.'); return; }
-    if (!content) { alert('Please write something before saving.'); return; }
+    if (docs.length === 0) {
+        resultsContainer.innerHTML = '<p class="no-results">No notes found.</p>';
+        return;
+    }
 
-    const doc = { title, content, savedAt: new Date().toLocaleString() };
-    localStorage.setItem(`doc_${title}`, JSON.stringify(doc));
-    alert(`"${title}" saved!`);
+    docs.forEach(doc => {
+        const card = document.createElement('div');
+        card.className = 'result-card';
+        card.innerHTML = `
+            <div class="result-header">
+                <h2 class="result-title">${doc.title}</h2>
+                <span class="result-date">${doc.savedAt}</span>
+            </div>
+            <p class="result-preview">${doc.content}</p>
+        `;
+
+        card.addEventListener('click', () => {
+            window.location.href = `newFile.html?title=${encodeURIComponent(doc.title)}`;
+        });
+
+        resultsContainer.appendChild(card);
+    });
+}
+
+function search() {
+    const query = searchInput.value.trim().toLowerCase();
+
+    if (!query) {
+        resultsContainer.innerHTML = '';
+        return;
+    }
+
+    const matches = getDocs().filter(doc =>
+        doc.title.toLowerCase().includes(query) ||
+        doc.content.toLowerCase().includes(query)
+    );
+
+    renderResults(matches);
+}
+
+searchBtn.addEventListener('click', search);
+searchInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') search();
 });
