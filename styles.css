@@ -15,63 +15,96 @@
     --gold: #feac32;
     --orange: #ffac33;
     --dark-orange: #f89808;
+    --input-bg: rgba(255, 255, 255, 0.06);
+    --input-border: rgba(255, 255, 255, 0.2);
 }
 
 body {
-    background: linear-gradient(to right, black , white);
+    background: linear-gradient(to right, black, white);
     color: var(--white);
-}
-
-h1,
-#result {
-    text-align: center;
+    font-family: sans-serif;
+    min-height: 100vh;
+    padding: 20px 0 40px;
 }
 
 h1 {
-    margin: 10px 0 15px;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    margin: 24px 0 14px;
+    color: var(--white);
 }
 
 .container {
     margin: auto;
-    padding: 10px;
     width: 80%;
-    border-style: double;
-    border-width: 14px;
-    border-color: var(--white);
+    max-width: 480px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    overflow: hidden;
 }
 
 .btn-container {
-    background: linear-gradient(to right, lightgrey, white);
+    background: rgba(255, 255, 255, 0.04);
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    padding: 24px 28px 28px;
 }
 
-@media (min-width: 760px) {
-    .btn-container {
-        flex-direction: row;
-    }
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-#result {
-    margin-top: 15px;
-    font-size: 1.2rem;
-    line-height: 30px;
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px 14px;
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 3px;
+    color: var(--white);
+    font-size: 0.9rem;
+    transition: border-color 0.2s;
+    outline: none;
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+input:focus {
+    border-color: rgba(254, 172, 50, 0.6);
 }
 
 .btn {
     cursor: pointer;
-    width: 200px;
-    margin: 10px 0 10px 0.5rem;
+    width: 180px;
+    padding: 10px 0;
+    margin: 14px auto 0;
     color: var(--black);
-    background-color: var(--gold);
+    font-size: 0.85rem;
+    font-weight: 600;
     background-image: linear-gradient(var(--golden-yellow), var(--orange));
-    border-color: var(--gold);
-    border-width: 3px;
+    border: none;
+    border-radius: 3px;
+    transition: opacity 0.2s, transform 0.1s;
 }
 
 .btn:hover {
     background-image: linear-gradient(var(--yellow), var(--dark-orange));
+    opacity: 0.92;
 }
 
+.btn:active {
+    transform: translateY(1px);
+}
+
+@media (max-width: 480px) {
+    .container { width: 92%; }
+    .btn-container { padding: 18px 16px 22px; }
+}
