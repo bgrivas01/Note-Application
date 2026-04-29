@@ -55,3 +55,18 @@ body {
     justify-content: space-between; /* 🔥 splits left & right */
     align-items: center;
 }
+.upload-btn {
+    cursor: pointer;
+    padding: 6px 12px;
+    background: #f0f0f0;
+    border: 1px dashed #aaa;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+#file-name {
+    flex: 1;
+    font-size: 13px;
+    color: #555;
+    font-style: italic;
+}

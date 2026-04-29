@@ -17,14 +17,31 @@ if (docs.length === 0) {
         const card = document.createElement('div');
         card.className = 'card';
 
+        
+        let mediaHtml = '';
+        if (doc.media && doc.media.type.startsWith('image/')) {
+            mediaHtml = `<img src="${doc.media.dataUrl}" style="width:100%;max-height:160px;object-fit:cover;border-radius:4px;margin-bottom:6px;">`;
+        } else if (doc.media) {
+            const icon = doc.media.type === 'application/pdf' ? '📄' : '📝';
+            mediaHtml = `<span style="font-size:13px;color:rgba(255,255,255,0.6);">${icon} ${doc.media.name}</span>`;
+        }
+
         card.innerHTML = `
             <div class="card-header">
                 <h2 class="card-title">${doc.title}</h2>
                 <span class="card-date">${doc.savedAt}</span>
             </div>
+            ${mediaHtml}
             <p class="card-preview">${doc.content}</p>
             <button class="delete-btn" data-title="${doc.title}">Delete</button>
         `;
+
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', (e) => {
+            if (!e.target.classList.contains('delete-btn')) {
+                window.location.href = `newFile.html?title=${encodeURIComponent(doc.title)}`;
+            }
+        });
 
         library.appendChild(card);
     });

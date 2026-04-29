@@ -14,11 +14,15 @@
 
         <textarea placeholder="Write your note here..." class="content-input"></textarea>
 
+        <div id="media-preview"></div>
+
         <div class="buttons">
+            <label class="upload-btn"> Attach, max 1 file.
+                <input type="file" id="file-input" accept="image/*,.pdf,.docx" hidden>
+            </label>
+            <span id="file-name"></span>
             <button id="save-btn">Post</button>
-            <a href="homepage.html">
-                <button id="home-btn">Home</button>
-            </a>
+            <a href="homepage.html"><button id="home-btn">Home</button></a>
         </div>
     </main>
 

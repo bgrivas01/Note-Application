@@ -130,9 +130,30 @@ def login():
     else:
         return jsonify({"status": "error", "message": "Invalid credentials"}), 401
 
+@app.route("/change-password", methods=["POST"])
+def change_password():
+    data = request.get_json()
+    identifier = data.get("identifier", "").strip()
+    current_pw = data.get("current_password", "").strip()
+    new_pw     = data.get("new_password", "").strip()
 
+    if not all([identifier, current_pw, new_pw]):
+        return jsonify({"status": "error", "message": "Missing fields"}), 400
 
+    conn = get_db()
+    user = conn.execute(
+        "SELECT * FROM users WHERE (username = ? OR email = ?) AND password = ?",
+        (identifier, identifier, hash_password(current_pw))
+    ).fetchone()
 
+    if not user:
+        conn.close()
+        return jsonify({"status": "error", "message": "Incorrect password or user not found"}), 401
+
+    conn.execute("UPDATE users SET password = ? WHERE user_id = ?", (hash_password(new_pw), user["user_id"]))
+    conn.commit()
+    conn.close()
+    return jsonify({"status": "success"}), 200
 
 # ──────────────────────────────────────────────
 # Leg
